@@ -26,4 +26,44 @@ ticTable = {"1": " ", "2": " ", "3": " ",
             "4": " ", "5": " ", "6": " ",
             "7": " ", "8": " ", "9": " "}
 
-print(ticTable)
+ticTacKey = []
+
+for key in ticTable:
+    ticTacKey.append(key)
+
+'''
+   Because i would have to print everytime a player make a move, i would create a function that 
+   i will call after every move. it would allow me to print when needed. 
+'''
+def displayTictable(table):
+    print(table['1'] + '|' + table['2'] + '|' + table['3'])
+    print('-+-+-')
+    print(table['4'] + '|' + table['5'] + '|' + table['6'])
+    print('-+-+-')
+    print(table['7'] + '|' + table['9'] + '|' + table['9'])
+
+
+displayTictable(ticTable)
+
+while True:
+
+        char1 = input("Would you like to be X or 0.? :  ")
+        if char1 == "X" or char1 == "x":
+            char1x = char1
+            print("You have chosen (x)")
+            break
+        elif char1 == "o" or char1 == "O":
+            char10 = char1
+            print("You have chosen (0)")
+            break
+        else:
+            print("You have not chosen X or O")
+
+
+    # except:
+    #      print("Enter either X or O")
+    #      continue
+    #
+    # finally:
+    #     print("Thank for chosen")
+    # print(char1)
