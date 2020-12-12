@@ -45,7 +45,7 @@ def displayTictable(table):
     print('-+-+-')
     print(table['4'] + '|' + table['5'] + '|' + table['6'])
     print('-+-+-')
-    print(table['7'] + '|' + table['9'] + '|' + table['9'])
+    print(table['7'] + '|' + table['8'] + '|' + table['9'])
 
 
 '''
@@ -68,11 +68,11 @@ while True:
 
     char1 = input("Choose between X or 0.? :  ")
     if char1 == "X" or char1 == "x":
-        char1x = char1
+
         print("You have chosen (x)")
         break
     elif char1 == "o" or char1 == "O":
-        char10 = char1
+
         print("You have chosen (0)")
         break
     else:
@@ -87,7 +87,7 @@ while True:
 
 def playGame():
     # I'm using count to determine the number of play turn and if max play turn is reached.
-    memmove = char1
+    memmove = char1.upper()
     count = 0
 
     def onWin():
@@ -97,70 +97,100 @@ def playGame():
 
     for p in range(10):
         displayTictable(ticTable)
-        print("Player, " + memmove + " turn to play")
+        print("Player, " + memmove + " turn to play.\n Enter 1-9 to take a position")
 
-        urmove = input()
+        '''
+        A try catch is added to the input case, in case other characters are entered that are not the specified game
+        numbers(string). if this is not abled properly it can break the game flow.'''
 
-        if ticTable[urmove] == ' ':
-            ticTable[urmove] = memmove
-            count += 1
-        else:
-            print("Position already contain either X or O.\n Play in a blank position")
-            continue
+        try:
+            ursmove = input()
+
+            if ticTable[ursmove] == " ":
+                ticTable[ursmove] = memmove
+                count += 1
+            else:
+                print("Position already contain either X or O.\n Play in a blank position")
+                continue
+        except:
+            print("Error has occur")
+        finally:
+            print("next player would play")
 
             # if a player play in a position that is already assign a character the above message
             # notify the player on that.
+            '''Becouse of the limited number of move in the game, a player on only move 4 -5 times to 
+                either win the game, lose or draw. so i would build a check to determine if the player X or O
+                has won after 5 moves.            
+            '''
+
+        if count >= 5:
+            if ticTable["1"] == ticTable["2"] == ticTable["3"] != " ":
+                # Determine if the character is same on top across table
+                onWin()
+                break
+            elif ticTable["4"] == ticTable["5"] == ticTable["6"] != " ":
+                # Determine if the character is same on the middle across table
+                displayTictable(ticTable)
+                onWin()
+                break
+            elif ticTable["7"] == ticTable["8"] == ticTable["9"] != " ":
+                # Determine if the character is same on bottom down across table
+                displayTictable(ticTable)
+                onWin()
+                break
+            elif ticTable["1"] == ticTable["4"] == ticTable["7"] != " ":
+                # Determine if the character is same on left side across table
+                displayTictable(ticTable)
+                onWin()
+                break
+            elif ticTable["2"] == ticTable["5"] == ticTable["8"] != " ":
+                # Determine if the character is same on the middle line  across table
+                displayTictable(ticTable)
+                onWin()
+                break
+            elif ticTable["3"] == ticTable["6"] == ticTable["9"] != " ":
+                # Determine if the character is same on right side across table
+                displayTictable(ticTable)
+                onWin()
+                break
+            elif ticTable["7"] == ticTable["5"] == ticTable["3"] != " ":
+                # Determine if the character is same diagonal across table
+                displayTictable(ticTable)
+                onWin()
+                break
+            elif ticTable["1"] == ticTable["5"] == ticTable["9"] != " ":
+                # Determine if the character is same diagonal across table
+                displayTictable(ticTable)
+                onWin()
+                break
+            '''
+             After we determine win, we would now determine if the game is draw, three possible outcome 
+             of the game is win, draw and lose. the game is draw if no player x and o are able to line their
+             character they are playing in any of the above mention win. becouse the game as to complete to determine
+             a draw the turn by player in total would be 9. 
+             '''
+        if count == 9:
+            print("\nIt's a draw game!!!\n")
+            print("Game Over.")
 
             '''
-                Becouse of the limited number of move in the game, a player on only move 4 -5 times to 
-                either win the game, lose or draw. so i would build a check to determine if the player X or O
-                has won after 5 moves.
-             '''
+            This is a 2 player def and not the AI, i have to allow the second player to play 
+            after the first player.
+            '''
 
-            if count >= 5:
-                if ticTable["1"] == ticTable["2"] == ticTable["3"] != " ":
-                    # Determine if the character is same on top across table
-                    onWin()
-                    break
-                elif ticTable["4"] == ticTable["5"] == ticTable["6"] != " ":
-                    # Determine if the character is same on the middle across table
-                    displayTictable(ticTable)
-                    print("Congratulation Player " + memmove + " you have won the game \n")
-                    print("Game Over. \n")
-                    break
-                elif ticTable["7"] == ticTable["8"] == ticTable["9"] != " ":
-                    # Determine if the character is same on bottom down across table
-                    displayTictable(ticTable)
-                    print("Congratulation Player " + memmove + " you have won the game \n")
-                    print("Game Over. \n")
-                    break
-                elif ticTable["1"] == ticTable["4"] == ticTable["7"] != " ":
-                    # Determine if the character is same on left side across table
-                    displayTictable(ticTable)
-                    print("Congratulation Player " + memmove + " you have won the game \n")
-                    print("Game Over. \n")
-                    break
-                elif ticTable["2"] == ticTable["5"] == ticTable["8"] != " ":
-                    # Determine if the character is same on the middle line  across table
-                    displayTictable(ticTable)
-                    print("Congratulation Player " + memmove + " you have won the game \n")
-                    print("Game Over. \n")
-                    break
-                elif ticTable["3"] == ticTable["6"] == ticTable["9"] != " ":
-                    # Determine if the character is same on right side across table
-                    displayTictable(ticTable)
-                    print("Congratulation Player " + memmove + " you have won the game \n")
-                    print("Game Over. \n")
-                    break
-                elif ticTable["7"] == ticTable["5"] == ticTable["3"] != " ":
-                    # Determine if the character is same diagonal across table
-                    displayTictable(ticTable)
-                    print("Congratulation Player " + memmove + " you have won the game \n")
-                    print("Game Over. \n")
-                    break
-                elif ticTable["1"] == ticTable["5"] == ticTable["9"] != " ":
-                    # Determine if the character is same diagonal across table
-                    displayTictable(ticTable)
-                    print("Congratulation Player " + memmove + " you have won the game \n")
-                    print("Game Over. ")
-                    break
+        if memmove == "X":
+            memmove = "O"
+        else:
+            memmove = "X"
+
+        ''' This is the end of the 2 player function.
+        '''
+
+playGame()
+
+'''In  AI  side of things i would be using an algorithm call minimax
+
+
+human user play first.
+'''
