@@ -3,9 +3,10 @@
     (To Play). Players would be ask to choose if they want to play another player or the AI. Players would have to
     answer with a Yes/No to  make a playing choice.
 
-    player would be allow to choose between 2 different characters X or 0. if the first player make a choice
-    between the 2, the second player is automatically assign the next character. Player would enter numbers that would
-    represent the position they which to play. Only number 1 - 9 would be use to determine position of play.
+    player would be allow to choose between 2 different characters X or 0 if they are playing another person.
+    if the first player make a choice between the 2, the second player is automatically assign the next character.
+    Player would enter numbers that would represent the position they which to play.
+    Only number 1 - 9 would be use to determine position of play.
 '''
 
 '''
@@ -25,6 +26,7 @@
    initial value is empty but would be replaced by a character after each player move. 
    
 '''
+
 ticTable = {"1": " ", "2": " ", "3": " ",
             "4": " ", "5": " ", "6": " ",
             "7": " ", "8": " ", "9": " "}
@@ -41,42 +43,44 @@ for key in enumerate(ticTable):
 
 
 def displayTictable(table):
-    print(table['1'] + '|' + table['2'] + '|' + table['3'])
-    print('-+-+-')
-    print(table['4'] + '|' + table['5'] + '|' + table['6'])
-    print('-+-+-')
-    print(table['7'] + '|' + table['8'] + '|' + table['9'])
+    print(' |', table['1'] + ' | ' + table['2'] + ' | ' + table['3'], '| ')
+    print('--------------')
+    print(' |', table['4'] + ' | ' + table['5'] + ' | ' + table['6'], '| ')
+    print('--------------')
+    print(' |', table['7'] + ' | ' + table['8'] + ' | ' + table['9'], '| ')
+    print('--------------')
 
 
 '''
    I build the question code, this would ask question from the player to determine if he/she want to play
-   with the AI or not. This are input requested, and what the player decide would determine who he/she play with.
-   using if else to make decision. 
+   with the AI or not. This are input requested, and what the player decide would determine if player would be 
+   playing with AI or human. 
 '''
 while True:
     docwho = input("Would you like to play with the AI.?: (y/n) ")
     if docwho == "y" or docwho == "Y":
         print("You have chosen to play with the AI")
-        break
+
     elif docwho == "n" or docwho == "N":
-        print("You are not playing with the AI")
-        break
+        print(" You are playing with human \n")
+        char1 = input("Choose between X or 0.? :  ")
+        if char1 == "X" or char1 == "x":
+
+            print("You have chosen (x)")
+            break
+        elif char1 == "o" or char1 == "O":
+
+            print("You have chosen (0)")
+            break
+        else:
+            print("You have not chosen X or O")
+            break
+
     else:
         print("choose if you want to play with the AI or Not")
 print("***************************************************************")
-while True:
+# while True:
 
-    char1 = input("Choose between X or 0.? :  ")
-    if char1 == "X" or char1 == "x":
-
-        print("You have chosen (x)")
-        break
-    elif char1 == "o" or char1 == "O":
-
-        print("You have chosen (0)")
-        break
-    else:
-        print("You have not chosen X or O")
 
 ''' 
     now i would create a function that enter player chosen character in the position they decide base on the table
@@ -111,15 +115,18 @@ def playGame():
                 count += 1
             else:
                 print("Position already contain either X or O.\n Play in a blank position")
-                continue
+                if memmove == "O":
+                    memmove = "X"
+                else:
+                    memmove = "O"
         except:
             print("Error has occur")
         finally:
-            print("next player would play")
+            print("Play")
 
             # if a player play in a position that is already assign a character the above message
             # notify the player on that.
-            '''Becouse of the limited number of move in the game, a player on only move 4 -5 times to 
+            '''Because of the limited number of move in the game, a player on only move 4 -5 times to 
                 either win the game, lose or draw. so i would build a check to determine if the player X or O
                 has won after 5 moves.            
             '''
@@ -187,10 +194,5 @@ def playGame():
         ''' This is the end of the 2 player function.
         '''
 
+
 playGame()
-
-'''In  AI  side of things i would be using an algorithm call minimax
-
-
-human user play first.
-'''
