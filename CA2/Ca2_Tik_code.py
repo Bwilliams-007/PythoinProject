@@ -1,4 +1,5 @@
 '''
+    This is the main:
     I will Create a 2 player, firstly. and Then build and algorithm that would be like the third player.
     (To Play). Players would be ask to choose if they want to play another player or the AI. Players would have to
     answer with a Yes/No to  make a playing choice.
@@ -27,6 +28,9 @@
    
 '''
 
+from CA2.gamedesign_move import *
+
+
 ticTable = {"1": " ", "2": " ", "3": " ",
             "4": " ", "5": " ", "6": " ",
             "7": " ", "8": " ", "9": " "}
@@ -52,6 +56,8 @@ def displayTictable(table):
 
 
 '''
+
+
    I build the question code, this would ask question from the player to determine if he/she want to play
    with the AI or not. This are input requested, and what the player decide would determine if player would be 
    playing with AI or human. 
@@ -60,6 +66,12 @@ while True:
     docwho = input("Would you like to play with the AI.?: (y/n) ")
     if docwho == "y" or docwho == "Y":
         print("You have chosen to play with the AI")
+        if __name__ == '__main__':
+            x_player = AI('X')
+            o_player = HumanPlayer('O')
+            g = AI_Tic()
+            play(g, x_player, o_player, print_game=True)
+            quit()
 
     elif docwho == "n" or docwho == "N":
         print(" You are playing with human \n")
@@ -105,7 +117,7 @@ def playGame():
 
         '''
         A try catch is added to the input case, in case other characters are entered that are not the specified game
-        numbers(string). if this is not abled properly it can break the game flow.'''
+        numbers(string). if this is not enable properly it can break the game flow.'''
 
         try:
             ursmove = input()
