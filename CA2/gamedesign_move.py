@@ -1,6 +1,6 @@
 import math
 import time
-from gamePlayer_AI import HumanPlayer, AI
+from CA2.gamePlayer_AI import HumanPlayer, AI
 
 '''
 Created a class AI_Tic which is then initialise with a board and current winner that is set to none.
