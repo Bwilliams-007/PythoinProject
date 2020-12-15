@@ -1,6 +1,6 @@
 import math
 import time
-# from gamePlayer_AI import HumanPlayer, AI
+from gamePlayer_AI import HumanPlayer, AI
 
 '''
 Created a class AI_Tic which is then initialise with a board and current winner that is set to none.
@@ -25,7 +25,16 @@ class AI_Tic():
     want to play which should be a number from 0-8 and the let value is could be X or 0. I check if the space is empty
     and if true, i assign a let to that square. Then i check if it's the winner, if it's i return winner 
     to current player.
-    '''
+'''
+
+    # @staticmethod
+    # def pd_nums():
+    #     # 0 | 1 | 2
+    #     number_board = [[str(i) for i in range(j * 3, (j + 1) * 3)] for j in range(3)]
+    #     for row in number_board:
+    #         print('| ' + ' | '.join(row) + ' |')
+    #         print('-------------')
+
     def make_move(self, square, let):
         if self.board[square] == ' ':
             self.board[square] = let
@@ -79,6 +88,13 @@ class AI_Tic():
     def a_moves(self):
         return [i for i, x in enumerate(self.board) if x == " "]
 
+    '''
+   The play function has an X and O player, with print game. The X player start the game if the game is empty. 
+   if the player is O, we get the player next move else we get the X player next move. We make a move and check to see 
+   if there is a current winner, if there is a current winner we print the lett win else we print it's a draw game.
+   
+   '''
+
 
 def play(game, x_player, o_player, print_game=True):
     # if print_game:
@@ -99,13 +115,11 @@ def play(game, x_player, o_player, print_game=True):
 
             if game.current_winner:
                 if print_game:
-                    print(lett + ' wins!')
-                return lett  # ends the loop and exits the game
+                    print("Congratulation" + lett + ' wins!')
+                return lett
             lett = 'O' if lett == 'X' else 'X'  # switches player
 
         time.sleep(.5)
 
     if print_game:
         print('Draw Game!')
-
-    
